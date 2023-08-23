@@ -1,0 +1,68 @@
+"""
+Type of keys
+"""
+Primary key:
+	it is a col val which uniquely identifies each record in a table
+	cannot be null.
+	Eg: customer_id SERIAL PRIMARY KEY
+	Here customer_id col val uniquely identifies each customer.
+
+Foreign key:
+	used to  establish a relationship between 2 tables.
+	Eg:  CREATE TABLE Orders (
+		customer_id INT REFERENCES Customers(customer_id));
+
+	means customer_id in Orders table must match with any customer_id in Customer Table
+	this ensures that only registered Customers can make Orders.
+
+
+Unique Key:
+	used to ensure that column has unique values in a table.
+	But it can be null.
+	Eg: email VARCHAR(100) UNIQUE
+	    email value must be unique.
+
+Candidate Key:
+	a column or minimal set of columns that uniquely identifies each record in a table.
+	cannot be null so can be used as primary key.
+	Eg:	CREATE TABLE Customers (
+  		customer_id SERIAL PRIMARY KEY,
+  		first_name VARCHAR(50),
+  		last_name VARCHAR(50),
+  		email VARCHAR(100) UNIQUE
+		);
+	Here both customer_id and email are candidate keys.
+
+
+Composite Key:
+	set of columns that uniquely identifies each record in a table.
+	Eg: 	customer_id INT,
+  		order_date DATE,
+  		total_amount DECIMAL(10, 2),
+		UNIQUE (customer_id, order_date)
+
+		Here combination of (customer_id, order_date) cols uniquely identifies
+		each record in a table.
+
+Super Key:
+	a set of columns that uniquely identifies each record in a table.
+	may contain extra columns compared to candidate key.
+	a minimal superkey is a candidate key.
+
+
+Surrogate Key:
+	an artificially created primary key(often using an auto-incrementing integer value).
+	Eg: order_id SERIAL PRIMARY KEY
+		The "SERIAL" data type is a special type in PostgreSQL that is an auto-incrementing integer.
+		It automatically generates a unique integer value for each new row inserted into the table. 
+
+Alternate Key:
+	a candidate key that is not selected as the primary key.
+	Eg:	CREATE TABLE Customers (
+  		customer_id SERIAL PRIMARY KEY,
+  		first_name VARCHAR(50),
+  		last_name VARCHAR(50),
+  		email VARCHAR(100) UNIQUE
+		);
+
+		Here email is alternate key as it is not used as primary key.
